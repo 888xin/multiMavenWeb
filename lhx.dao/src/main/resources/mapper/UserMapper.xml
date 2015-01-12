@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhx.dao.UserDao">
+
+    <insert id="insertUser" parameterType="User" keyProperty="id">
+        insert into days_user(
+         state,
+         nickname)
+         values
+         (#{state},#{nickname})
+    </insert>
+    
+    <select id="getUser" parameterType="int" resultType="User">
+        select id,state,nickname
+        from
+        days_user
+        where
+        id = #{id}
+    </select>
+
+</mapper>
