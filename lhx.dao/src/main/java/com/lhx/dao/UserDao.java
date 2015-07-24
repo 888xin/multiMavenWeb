@@ -22,6 +22,13 @@ public interface UserDao {
     public int insertUser(User user);
 
     /**
+     * 添加用户，返回主键
+     * @param user
+     * @return
+     */
+    public int insertUserBackID(User user);
+
+    /**
      * 根据id获得用户
      * @param id
      * @return
