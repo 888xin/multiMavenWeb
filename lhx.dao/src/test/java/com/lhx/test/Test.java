@@ -61,6 +61,7 @@ public class Test {
         System.out.println(user.getId());
     }
 
+    
     @org.junit.Test
     public void testGetAvatars() throws SQLException {
         //本地数据库数据总条数
