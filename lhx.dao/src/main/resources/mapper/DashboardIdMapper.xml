@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhx.dao.DashboardIdDao">
+
+    <insert id="getDashboardId" parameterType="DashboardId" useGeneratedKeys="true" keyProperty="dashboardId">
+        insert into createDashboardId(dashboardId)
+        values
+        (#{dashboardId})
+    </insert>
+
+
+</mapper>

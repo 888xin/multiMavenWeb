@@ -6,6 +6,7 @@
     <!-- 命名空间 -->
     <typeAliases>
         <typeAlias alias="User" type="com.lhx.model.User"/>
+        <typeAlias alias="DashboardId" type="com.lhx.model.DashboardId"/>
     </typeAliases>
 
     <!-- 映射map -->

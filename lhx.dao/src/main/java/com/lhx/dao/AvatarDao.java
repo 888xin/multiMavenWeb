@@ -14,4 +14,6 @@ public interface AvatarDao {
 
 
     public List<Avatar> getAvatar(Map<String,Integer> map);
+
+    public List<Avatar> getAvatar2(Map<String,Object> map);
 }

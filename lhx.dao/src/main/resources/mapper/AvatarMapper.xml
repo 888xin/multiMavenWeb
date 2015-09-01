@@ -10,6 +10,17 @@
         app_avatars
         limit #{start} , #{limit}
     </select>
+
+
+    <select id="getAvatar2" parameterType="java.util.Map" resultType="com.lhx.model.Avatar">
+        select avatarsId ,accountId ,avatarsPath
+        from
+        app_avatars
+        <if test="startId != null">
+            where avatarsId &lt; #{startId}
+        </if>
+        ORDER BY avatarsId DESC LIMIT #{limit}
+    </select>
     
 
 </mapper>
