@@ -19,8 +19,7 @@
 
 
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
-          destroy-method="close" >
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close" >
         <property name="driverClassName">
             <value>${jdbc_driverClassName}</value>
         </property>

@@ -7,6 +7,11 @@
     <typeAliases>
         <typeAlias alias="User" type="com.lhx.model.User"/>
         <typeAlias alias="DashboardId" type="com.lhx.model.DashboardId"/>
+        <typeAlias alias="Dashboard" type="com.lhx.model.Dashboard"/>
+        <typeAlias alias="ContentInfo" type="com.lhx.model.ContentInfo"/>
+        <typeAlias alias="FriendCircle" type="com.lhx.model.FriendCircle"/>
+        <typeAlias alias="BetJc" type="com.lhx.model.BetJc"/>
+        <typeAlias alias="BetOp" type="com.lhx.model.BetOp"/>
     </typeAliases>
 
     <!-- 映射map -->

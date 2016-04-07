@@ -1,9 +1,11 @@
 package com.lhx.test;
 
 import com.lhx.dao.AvatarDao;
+import com.lhx.dao.DashboardDao;
 import com.lhx.dao.DashboardIdDao;
 import com.lhx.dao.UserDao;
 import com.lhx.model.Avatar;
+import com.lhx.model.Dashboard;
 import com.lhx.model.DashboardId;
 import com.lhx.model.User;
 import com.lhx.util.JdbcUtils;
@@ -32,6 +34,7 @@ public class Test {
     private UserDao userDao ;
     private AvatarDao avatarDao ;
     private DashboardIdDao dashboardIdDao ;
+    private DashboardDao dashboardDao ;
 
     @Before
     public void before(){
@@ -41,6 +44,7 @@ public class Test {
         userDao = (UserDao) context.getBean("userDao");
         avatarDao = (AvatarDao) context.getBean("avatarDao");
         dashboardIdDao = (DashboardIdDao) context.getBean("dashboardIdDao");
+        dashboardDao = (DashboardDao) context.getBean("dashboardDao");
     }
 
     @org.junit.Test

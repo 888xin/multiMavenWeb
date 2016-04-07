@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhx.dao.ContentInfoDao">
+
+    <insert id="insert" parameterType="ContentInfo" useGeneratedKeys="true" keyProperty="contentId">
+		INSERT INTO
+		content_info
+		(contentId, accountId, dashboardId,title,content,images,contentType,contentParams,lat,lng,localName, createTime)
+		VALUES (#{contentId},#{accountId},#{dashboardId},#{title},#{content},#{images},#{contentType},#{contentParams},#{lat},#{lng},#{localName},#{createTime})
+	</insert>
+
+    <select id="findByDashboardId" resultType="ContentInfo">
+		SELECT * FROM content_info WHERE dashboardId=#{dashboardId} LIMIT 1
+	</select>
+
+    <select id="findContentInfoMapByDashboardIds" resultType="ContentInfo">
+        SELECT * FROM content_info
+        WHERE dashboardId IN
+        <foreach collection="list" item="dashboardId" open="(" separator="," close=")">
+            #{dashboardId}
+        </foreach>
+    </select>
+
+</mapper>
