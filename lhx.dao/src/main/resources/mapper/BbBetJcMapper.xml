@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhx.dao.BbBetJcDao">
+
+	<sql id="TAB_NAME">cbs_bb_bet_jc</sql>
+
+	<select id="selectById" resultType="BetJc">
+		SELECT 
+		bId, 
+		contestId,
+		userId, 
+		support, 
+		handicap, 
+		homeRoi, 
+		awayRoi, 
+		bet, 
+		coupon,
+		back, 
+		status, 
+		company, 
+		createTime, 
+		contentId, 
+		ipaddress  
+		FROM 
+		<include refid="TAB_NAME" />
+		WHERE
+		bId = #{bId}
+		LIMIT 1
+	</select>
+
+	<!--<insert id="insertAndGetPrimaryKey" parameterType="com.lifeix.cbs.contest.dto.bet.BetJc" useGeneratedKeys="true" keyProperty="bId" >-->
+		<!--INSERT INTO -->
+		<!--<include refid="TAB_NAME" /> -->
+		<!--(contestId, userId,isLongbi, support, handicap, homeRoi, awayRoi, bet,coupon, back, status, company, createTime, contentId, ipaddress) -->
+		<!--VALUES -->
+		<!--(#{contestId},#{userId},#{isLongbi},#{support},#{handicap},#{homeRoi},#{awayRoi},#{bet},#{coupon},#{back},#{status},#{company},#{createTime},#{contentId},#{ipaddress})-->
+	<!--</insert>-->
+	<!---->
+	<!--<select id="selectByBet" resultType="com.lifeix.cbs.contest.dto.bet.BetJc">-->
+		<!--SELECT -->
+		<!--bId, -->
+		<!--contestId,-->
+		<!--userId, -->
+		<!--isLongbi,-->
+		<!--support, -->
+		<!--handicap, -->
+		<!--homeRoi, -->
+		<!--awayRoi, -->
+		<!--bet, coupon,-->
+		<!--back, -->
+		<!--status, -->
+		<!--company, -->
+		<!--createTime, -->
+		<!--contentId, -->
+		<!--ipaddress  -->
+		<!--FROM -->
+		<!--<include refid="TAB_NAME" />-->
+		<!--WHERE-->
+		<!--contestId = #{contestId} -->
+		<!--AND -->
+		<!--userId = #{userId} -->
+		<!--AND -->
+		<!--support = #{support} -->
+		<!--LIMIT 1-->
+	<!--</select>-->
+	<!---->
+	<!--<update id="updateContentId" parameterType="com.lifeix.cbs.contest.dto.bet.BetJc">-->
+		<!--UPDATE-->
+		<!--<include refid="TAB_NAME" />-->
+		<!--SET-->
+		<!--contentId=#{contentId}   -->
+		<!--WHERE -->
+		<!--bId=#{bId}-->
+	<!--</update>-->
+
+	<!--<update id="updateContentIdById" >-->
+		<!--UPDATE-->
+		<!--<include refid="TAB_NAME" />-->
+		<!--SET-->
+		<!--contentId=#{contentId}   -->
+		<!--WHERE -->
+		<!--bId=#{bId} AND contentId is null-->
+	<!--</update>-->
+	<!---->
+	<!--<update id="updateSettle">-->
+		<!--UPDATE-->
+		<!--<include refid="TAB_NAME" />-->
+		<!--SET-->
+		<!--back=#{back}, status=#{status}    -->
+		<!--WHERE -->
+		<!--bId=#{bId}-->
+	<!--</update>-->
+	<!---->
+	<!--<select id="findBbBetJc" resultType="com.lifeix.cbs.contest.dto.bet.BetJc">-->
+		<!--SELECT -->
+		<!--bId, -->
+		<!--contestId,-->
+		<!--userId, -->
+		<!--isLongbi,-->
+		<!--support, -->
+		<!--handicap, -->
+		<!--homeRoi, -->
+		<!--awayRoi, -->
+		<!--bet, coupon,-->
+		<!--back, -->
+		<!--status, -->
+		<!--company, -->
+		<!--createTime, -->
+		<!--contentId, -->
+		<!--ipaddress  -->
+		<!--FROM -->
+		<!--<include refid="TAB_NAME" />-->
+		<!--<where> -->
+			<!--<if test="contestId !=  null" >-->
+	    	 <!--AND contestId = #{contestId} -->
+			<!--</if>-->
+			<!--<if test="userId !=  null" >-->
+			 <!--AND userId= #{userId} -->
+			<!--</if>-->
+			<!--<if test="status !=  null" >-->
+			 <!--AND status= #{status} -->
+			<!--</if>-->
+			<!--<if test="startId != null">-->
+				<!--AND bId &gt; #{startId} -->
+			<!--</if>-->
+			<!--ORDER BY bId ASC -->
+			<!--LIMIT #{limit}-->
+		<!--</where>-->
+	<!--</select>-->
+
+
+    <!--<select id="findBbBetJcList" resultType="com.lifeix.cbs.contest.dto.bet.BetJc">-->
+        <!--SELECT-->
+        <!--bId,-->
+        <!--contestId,-->
+        <!--isLongbi,-->
+        <!--userId,-->
+        <!--support,-->
+        <!--handicap,-->
+        <!--homeRoi,-->
+        <!--awayRoi,-->
+        <!--bet,coupon,-->
+        <!--back,-->
+        <!--status,-->
+        <!--company,-->
+        <!--createTime,-->
+        <!--contentId,-->
+        <!--ipaddress-->
+        <!--FROM-->
+        <!--<include refid="TAB_NAME" />-->
+        <!--<where>-->
+            <!--<if test="contestId !=  null" >-->
+                <!--AND contestId = #{contestId}-->
+            <!--</if>-->
+            <!--<if test="userId !=  null" >-->
+                <!--AND userId= #{userId}-->
+            <!--</if>-->
+            <!--<if test="status !=  null" >-->
+                <!--AND status= #{status}-->
+            <!--</if>-->
+            <!--<if test="startId != null">-->
+                <!--AND bId &lt; #{startId}-->
+            <!--</if>-->
+            <!--<if test="startTime != null">-->
+                <!--AND createTime &gt; #{startTime}-->
+            <!--</if>-->
+            <!--<if test="endTime != null">-->
+                <!--AND createTime &lt; #{endTime}-->
+            <!--</if>-->
+        <!--</where>-->
+        <!--ORDER BY bId DESC-->
+        <!--LIMIT #{limit}-->
+    <!--</select>-->
+
+    <!--<delete id="deleteById">-->
+        <!--DELETE-->
+        <!--FROM-->
+        <!--<include refid="TAB_NAME" />-->
+        <!--WHERE-->
+        <!--bId = #{id}-->
+    <!--</delete>-->
+
+    <!--<select id="findFbBetJcByContestId" resultType="com.lifeix.cbs.contest.dto.bet.BetJc">-->
+        <!--SELECT-->
+        <!--bId,-->
+        <!--userId,-->
+        <!--isLongbi,-->
+        <!--bet,-->
+        <!--coupon,-->
+        <!--back,-->
+        <!--status,-->
+        <!--contentId-->
+        <!--FROM-->
+        <!--<include refid="TAB_NAME" />-->
+        <!--WHERE-->
+        <!--contestId = #{contestId}-->
+        <!--<if test="startId != null">-->
+            <!--AND bId &gt; #{startId}-->
+        <!--</if>-->
+        <!--ORDER BY bId-->
+        <!--LIMIT #{limit}-->
+    <!--</select>-->
+	
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhx.dao.FriendCircleDao">
+
+	<sql id="TAB_NAME">cbs_friend_circle</sql>
+
+	<select id="getFriendCircleByIds" resultType="FriendCircle">
+		SELECT
+		*
+		FROM 
+		<include refid="TAB_NAME" />
+		WHERE 
+		id in
+		<foreach item="item" index="index" collection="circleIds"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="client != null and client !=''">
+			and client = #{client}
+		</if>
+		AND contestType != 10
+		ORDER BY id DESC
+	</select>
+
+	<select id="getMyCircleByIds" resultType="FriendCircle">
+		SELECT
+		*
+		FROM 
+		<include refid="TAB_NAME" />
+		WHERE 
+		userId = #{userId}
+		<if test="client != null and client !=''">
+			AND client = #{client}
+		</if>
+		<if test="hasContent != null">
+			AND hasContent = #{hasContent}
+		</if>
+		<if test="type != null">
+			AND type = #{type}
+		</if>
+		AND contestType != 10
+		AND deleteFlag = 0
+		ORDER BY id DESC
+		LIMIT #{startId},#{limit}
+	</select>
+	
+	<select id="getMyYayaCircle" resultType="FriendCircle">
+		SELECT
+		*
+		FROM 
+		<include refid="TAB_NAME" />
+		WHERE 
+		userId = #{userId}
+		<if test="startId != null">
+			AND id &lt; #{startId} 
+		</if>
+		AND contestType = 10
+		AND deleteFlag = 0
+		ORDER BY id DESC
+		LIMIT #{limit}
+	</select>
+
+	<select id="getInnerCirclesNum" resultType="int">
+		SELECT
+		count(1)
+		from cbs_friend_circle
+		where
+        /*hasContent = 1*/
+        1=1
+		<if test="userId != null and userId !=''">
+			and userId = #{userId}
+		</if>
+
+		<if test="content != null and content != '' and userId != null">
+			or content like CONCAT('%','${content}','%' ) 
+		</if>
+		
+		<if test="content != null and content != ''  and userId == null">
+			and content like CONCAT('%','${content}','%' ) 
+		</if>
+	</select>
+	
+
+	<!--<select id="getInnerCircles" resultType="FriendCircle">-->
+		<!--SELECT-->
+		<!--*-->
+		<!--from cbs_friend_circle-->
+		<!--where-->
+		<!--/*hasContent = 1*/-->
+        <!--1=1-->
+		<!--<if test="userId != null and userId !=''">-->
+			<!--and userId = #{userId}-->
+		<!--</if>-->
+
+		<!--<if test="content != null  and content != '' and userId != null">-->
+			<!--or content like CONCAT('%','${content}','%' ) -->
+		<!--</if>-->
+		<!---->
+		<!--<if test="content != null and content != ''  and userId == null">-->
+			<!--and content like CONCAT('%','${content}','%' ) -->
+		<!--</if>-->
+
+		<!--<if test="startId != null">-->
+			<!--AND id &gt; #{startId}-->
+		<!--</if>-->
+		<!--<if test="endId != null">-->
+			<!--AND id &lt; #{endId}-->
+		<!--</if>-->
+
+		<!--<if test="startId != null">-->
+			<!--ORDER BY id-->
+		<!--</if>-->
+		<!--<if test="endId != null">-->
+			<!--ORDER BY id DESC-->
+		<!--</if>-->
+		<!---->
+		<!--<if test="startId == null and endId == null">-->
+			<!--ORDER BY id desc-->
+		<!--</if>-->
+
+        <!--<if test="skip == null">-->
+            <!--LIMIT #{limit}-->
+        <!--</if>-->
+        <!--<if test="skip != null">-->
+            <!--LIMIT #{skip},#{limit}-->
+        <!--</if>-->
+
+	<!--</select>-->
+
+    <select id="getInnerCircles" resultType="FriendCircle">
+        SELECT * FROM cbs_friend_circle WHERE ( contestType=0 OR contestType=1) AND params LIKE '%"support":1%' AND params NOT LIKE '%r3%'
+--         SELECT * FROM cbs_friend_circle where type=1 and contestType=1 LIMIT 5
+    </select>
+
+	<select id="findById" resultType="FriendCircle">
+		SELECT
+		*
+		from cbs_friend_circle
+		where
+		id = #{id}
+		limit 1
+	</select>
+
+	<update id="deleteById">
+		update cbs_friend_circle
+		set deleteFlag = 1
+		where
+		id =
+		#{id}
+	</update>
+
+	<insert id="insert" parameterType="FriendCircle"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		cbs_friend_circle
+		(userId, sourceId, sourceUserId, type, content, params, contestType,contestId,
+		client, deleteFlag, createTime, hasContent, coupon)
+		VALUES
+		(#{userId},#{sourceId},#{sourceUserId},#{type},#{content},#{params},#{contestType},#{contestId},
+		#{client},#{deleteFlag},now(),#{hasContent},#{coupon})
+	</insert>
+
+	<!--<update id="updateContent" parameterType="FriendCircle">-->
+		<!--UPDATE-->
+		<!--cbs_friend_circle-->
+		<!--SET content=#{content}, params=#{params},sourceId=#{sourceId},-->
+		<!--hasContent=#{hasContent} WHERE-->
+		<!--id= #{id}-->
+	<!--</update>-->
+
+    <select id="findByContestId" resultType="FriendCircle">
+		SELECT
+		*
+		from cbs_friend_circle
+		where
+		contestType = #{contestType} AND contestId = #{contestId}
+	</select>
+
+    <update id="uploadParams" parameterType="FriendCircle">
+		update cbs_friend_circle
+		set params = #{params}
+		where
+		id = #{id}
+	</update>
+
+
+</mapper>
