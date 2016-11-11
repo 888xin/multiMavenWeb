@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -26,9 +25,9 @@ import java.util.concurrent.*;
  *
  * @Description
  */
-public class Test3 {
+public class JsonTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Test3.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JsonTest.class);
 
     @org.junit.Test
     public void test1() throws IOException {

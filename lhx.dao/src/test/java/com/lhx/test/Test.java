@@ -9,15 +9,18 @@ import com.lhx.model.Dashboard;
 import com.lhx.model.DashboardId;
 import com.lhx.model.User;
 import com.lhx.util.JdbcUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.StringUtils;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by lhx on 15-1-12 上午11:20
@@ -218,5 +221,44 @@ public class Test {
         DashboardId dashboardId = new DashboardId();
         dashboardIdDao.getDashboardId(dashboardId);
         System.out.println(dashboardId.getDashboardId());
+    }
+
+    @org.junit.Test
+    public void test4(){
+        try {
+            JSONObject jsonObject = new JSONObject("{\"id\":\"z1.lifeix-live.960753\",\"createdAt\":\"2016-09-08T09:46:21.916+08:00\",\"updatedAt\":\"2016-09-30T16:25:29.410557745+08:00\",\"expireAt\":\"2016-10-15T18:44:54.372+08:00\",\"title\":\"960753\",\"hub\":\"lifeix-live\",\"disabledTill\":0,\"disabled\":false,\"publishKey\":\"715a90f39e2c5c4e\",\"publishSecurity\":\"static\",\"hosts\":{\"publish\":{\"rtmp\":\"pili-publish.live.l99.com\"},\"live\":{\"hdl\":\"pili-live-hdl.live.l99.com\",\"hls\":\"pili-live-hls.live.l99.com\",\"http\":\"pili-live-hls.live.l99.com\",\"rtmp\":\"pili-live-rtmp.live.l99.com\",\"snapshot\":\"pili-live-snapshot.live.l99.com\"},\"playback\":{\"hls\":\"10003g3.playback1.z1.pili.qiniucdn.com\",\"http\":\"10003g3.playback1.z1.pili.qiniucdn.com\"},\"play\":{\"http\":\"pili-live-hls.live.l99.com\",\"rtmp\":\"pili-live-rtmp.live.l99.com\"}}}");
+            String expireAt = jsonObject.optString("expireAt");
+            if (!StringUtils.isEmpty(expireAt) && expireAt.startsWith("20")){
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+                    java.util.Date date = formatter.parse(expireAt);
+                    System.out.println(date);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @org.junit.Test
+    public void test5(){
+        Map map = new HashMap();
+        map.put("money", 969149.04);
+        Float userMoney = Float.valueOf(map.get("money").toString());
+        System.out.println(userMoney);
+        System.out.println(969149.04F);
+    }
+
+    @org.junit.Test
+    public void test6(){
+        Map map = new HashMap();
+        map.put("money", 969149.04);
+        Double userMoney = Double.valueOf(map.get("money").toString());
+        System.out.println(userMoney);
+    }
+
+    @org.junit.Test
+    public void test7(){
+        int i = 1 ;
+        i = i ++ ;
+        System.out.println(i);
     }
 }

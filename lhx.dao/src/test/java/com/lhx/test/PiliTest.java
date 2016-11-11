@@ -51,7 +51,7 @@ public class PiliTest {
     private static final String STREAM_STATUS_CONNECTED = "connected";
     private static final String PRE_STREAM_PRESET_PUBLISH_SECURITY = "static";
 //    private static final String PRE_STREAM_PRESET_TITLE = "888good";
-    private static final String PRE_STREAM_PRESET_TITLE = "35481";
+    private static final String PRE_STREAM_PRESET_TITLE = "960756";
 
     private static final String EXPECTED_BASE_PUBLISH_URL = "rtmp://" + "pili-publish.live.l99.com" + "/" + HUB_NAME + "/" + PRE_STREAM_PRESET_TITLE;
     private static final String EXPECTED_BASE_RTMP_LIVEURL = "rtmp://" + "pili-live-rtmp.live.l99.com" + "/" + HUB_NAME;
@@ -278,54 +278,7 @@ public class PiliTest {
         }
     }
 
-    @Test
-    public void testUpdateStream() {
-        // the test case order cannot be guaranteed
-        if (mStream == null) {
-            prepareStream();
-        }
 
-        try {
-            mStream.update(null, INVALID_PUBLISH_SECURITY, false);
-            fail();
-        } catch (PiliException e) {
-            assertEquals(BAD_REQ_MSG, e.getMessage());
-        }
-
-        try {
-            Stream stream = mStream.update(null, null, false);
-            assertNotNull(stream);
-            assertEquals(mStream.getPublishKey(), stream.getPublishKey());
-            assertEquals(mStream.getStreamId(), stream.getStreamId());
-            assertEquals(mStream.getPublishSecurity(), stream.getPublishSecurity());
-            assertEquals(false, stream.isDisabled());
-        } catch (PiliException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            String publishSecurity = "static";
-            Stream stream = mStream.update(null, publishSecurity, false);
-            assertNotNull(stream);
-            assertNotNull(stream.getPublishKey());
-            assertEquals(mStream.getStreamId(), stream.getStreamId());
-            assertEquals(publishSecurity, stream.getPublishSecurity());
-        } catch (PiliException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Stream stream = mStream.update(mStream.getPublishKey(),
-                    mStream.getPublishSecurity(), true);
-            assertNotNull(stream);
-            assertEquals(mStream.getPublishKey(), stream.getPublishKey());
-            assertEquals(mStream.getStreamId(), stream.getStreamId());
-            assertEquals(mStream.getPublishSecurity(), stream.getPublishSecurity());
-            assertEquals(true, stream.isDisabled());
-        } catch (PiliException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
     public void testDeleteStream() {

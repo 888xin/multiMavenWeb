@@ -1,5 +1,7 @@
 package com.lhx.util.poll;
 
+import java.util.LinkedList;
+
 /**
  * Created by lhx on 2016/9/8 9:49
  *
