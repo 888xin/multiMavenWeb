@@ -15,6 +15,7 @@ public class AESUtil {
      * @param password
      *            加密需要的密码
      * @return 密文
+     * https://www.cnblogs.com/vmax-tam/p/4624032.html
      */
     public static byte[] encrypt(String content, String password){
         try {
