@@ -86,3 +86,5 @@ public class AESUtil {
         String hexStrResult = ParseSystemUtil.parseByte2HexStr(encrypt);
         System.out.println("16进制的密文："  + hexStrResult);
     }
+
+}
